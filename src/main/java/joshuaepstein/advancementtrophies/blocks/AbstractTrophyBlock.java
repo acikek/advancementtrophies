@@ -1,12 +1,9 @@
 package joshuaepstein.advancementtrophies.blocks;
 
-import joshuaepstein.advancementtrophies.blocks.data.TrophyData;
 import joshuaepstein.advancementtrophies.blocks.entity.TrophyBlockEntity;
-import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,8 +1,6 @@
 package joshuaepstein.advancementtrophies.util;
 
-import joshuaepstein.advancementtrophies.blocks.data.TrophyData;
 import joshuaepstein.advancementtrophies.init.ModBlocks;
-import joshuaepstein.advancementtrophies.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Style;
