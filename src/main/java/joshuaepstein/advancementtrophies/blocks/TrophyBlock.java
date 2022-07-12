@@ -1,14 +1,12 @@
 package joshuaepstein.advancementtrophies.blocks;
 
+import joshuaepstein.advancementtrophies.Main;
 import joshuaepstein.advancementtrophies.blocks.entity.TrophyBlockEntity;
-import joshuaepstein.advancementtrophies.blocks.renderer.TrophyRenderer;
-import joshuaepstein.advancementtrophies.util.TrophyUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -25,10 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class TrophyBlock extends AbstractTrophyBlock{
 
@@ -143,7 +138,7 @@ public class TrophyBlock extends AbstractTrophyBlock{
         if(stack.getOrCreateTag().contains("BlockEntityTag")) {
             CompoundTag tag = stack.getOrCreateTag().getCompound("BlockEntityTag");
             if(tag.contains("advancementName")) {
-                tooltip.add(new TextComponent(ChatFormatting.DARK_GRAY + "Advancement: " + ChatFormatting.WHITE + tag.getString("advancementName")));
+                tooltip.add(Component.literal(ChatFormatting.DARK_GRAY + "Advancement: " + ChatFormatting.WHITE + tag.getString("advancementName")));
             }
         }
         super.appendHoverText(stack, getter, tooltip, flag);
@@ -151,17 +146,7 @@ public class TrophyBlock extends AbstractTrophyBlock{
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if(TrophyRenderer.positionsWithoutName.contains(pPos)) {
-//            TrophyRenderer.positionsWithoutName.remove(pPos);
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    TrophyRenderer.positionsWithoutName.remove(pPos);
-                }
-            }, 100);
-        }
-        ItemStack itemStack = TrophyUtils.getTrophyItemStack(((TrophyBlockEntity) pLevel.getBlockEntity(pPos)).getAdvancementName(), ((TrophyBlockEntity) pLevel.getBlockEntity(pPos)).getAdvancementDisplayItem());
+        ItemStack itemStack = Main.getTrophyItemStack(((TrophyBlockEntity) pLevel.getBlockEntity(pPos)).getAdvancementName(), ((TrophyBlockEntity) pLevel.getBlockEntity(pPos)).getAdvancementDisplayItem());
         ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, itemStack);
         pLevel.addFreshEntity(itemEntity);
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
@@ -171,4 +156,6 @@ public class TrophyBlock extends AbstractTrophyBlock{
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return pLevel.getBlockState(pPos.above()).isAir() && !pLevel.getBlockState(pPos.east()).getMaterial().isLiquid() && !pLevel.getBlockState(pPos.west()).getMaterial().isLiquid() && !pLevel.getBlockState(pPos.north()).getMaterial().isLiquid() && !pLevel.getBlockState(pPos.south()).getMaterial().isLiquid();
     }
+
+
 }

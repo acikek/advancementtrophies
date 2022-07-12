@@ -5,7 +5,9 @@ import com.mojang.brigadier.builder.*;
 import com.mojang.brigadier.context.*;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
+
+import java.awt.*;
 
 public abstract class Command {
 
@@ -18,7 +20,7 @@ public abstract class Command {
     public abstract boolean isDedicatedServerOnly();
 
     protected final void sendFeedback(CommandContext<CommandSourceStack> context, String message, boolean showOps) {
-        context.getSource().sendSuccess(new TextComponent(message), showOps);
+        context.getSource().sendSuccess(Component.literal(message), showOps);
     }
     public void registerCommand(CommandDispatcher<CommandSourceStack> dispatcher, String literal) {
         LiteralArgumentBuilder<CommandSourceStack> builder = Commands.literal(this.getName());

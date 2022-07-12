@@ -5,10 +5,14 @@ import joshuaepstein.advancementtrophies.Main;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.player.Player;
 import org.w3c.dom.Text;
+
+import java.util.UUID;
 
 public class VersionCommand extends Command {
     @Override
@@ -24,10 +28,10 @@ public class VersionCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<CommandSourceStack> builder) {
         builder.executes(context -> {
-            context.getSource().sendSuccess(new TextComponent(ChatFormatting.GRAY + "You are running AdvancementTrophies" + ChatFormatting.WHITE + " v" + Main.MOD_VERSION), false);
-//            Send pactch notes url: https://patch.joshepstein.co.uk/trophies/
-            context.getSource().getPlayerOrException().sendMessage(new TextComponent(ChatFormatting.WHITE + "You can view the" + ChatFormatting.GOLD + " AdvancementTrophies " + ChatFormatting.WHITE + "Patch Notes here:"), context.getSource().getPlayerOrException().getUUID());
-            context.getSource().getPlayerOrException().sendMessage(new TextComponent(ChatFormatting.GRAY + "https://patch.joshepstein.co.uk/trophies").withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://patch.joshepstein.co.uk/trophies")).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent("https://patch.joshepstein.co.uk/trophies")))), context.getSource().getPlayerOrException().getUUID());
+            Player player = context.getSource().getPlayerOrException();
+            player.sendSystemMessage(Component.literal(ChatFormatting.GRAY + "You are running" + ChatFormatting.GOLD + " AdvancementTrophies" + ChatFormatting.WHITE + " v" + Main.MOD_VERSION));
+            player.sendSystemMessage(Component.literal(ChatFormatting.WHITE + "You can view the" + ChatFormatting.GOLD + " AdvancementTrophies " + ChatFormatting.WHITE + "Patch Notes here:"));
+            player.sendSystemMessage(Component.literal(ChatFormatting.GRAY + Main.patchNotesURL).withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://patch.joshepstein.co.uk/trophies")).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("https://patch.joshepstein.co.uk/trophies")))));
             return 1;
         });
     }

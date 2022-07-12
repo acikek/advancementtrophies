@@ -1,31 +1,31 @@
 package joshuaepstein.advancementtrophies.event;
 
+import joshuaepstein.advancementtrophies.blocks.renderer.TrophyRenderer;
 import joshuaepstein.advancementtrophies.init.ModBlocks;
-import joshuaepstein.advancementtrophies.init.ModItems;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryEvents {
 
     @SubscribeEvent
-    public static void onBlockRegister(RegistryEvent.Register<Block> event){
-        ModBlocks.registerBlocks(event);
+    public static void onRegisters(RegisterEvent event){
+        event.register(ForgeRegistries.Keys.BLOCKS, (reg) -> {
+            ModBlocks.registerBlocks(reg);
+        });
+        event.register(ForgeRegistries.Keys.ITEMS, (reg) -> {
+            ModBlocks.registerBlockItems(reg);
+        });
+        event.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, (reg) -> {
+            ModBlocks.registerTileEntities(reg);
+        });
     }
 
     @SubscribeEvent
-    public static void onItemRegister(RegistryEvent.Register<Item> event){
-        ModItems.registerItems(event);
-        ModBlocks.registerBlockItems(event);
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlocks.TROPHY_TILE_ENTITY, TrophyRenderer::new);
     }
-
-    @SubscribeEvent
-    public static void onTileEntityRegister(RegistryEvent.Register<BlockEntityType<?>> event) {
-        ModBlocks.registerTileEntities(event);
-    }
-
 }

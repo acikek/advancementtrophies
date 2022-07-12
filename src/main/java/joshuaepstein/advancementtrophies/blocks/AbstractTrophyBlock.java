@@ -4,8 +4,6 @@ import joshuaepstein.advancementtrophies.blocks.entity.TrophyBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,16 +66,6 @@ public class AbstractTrophyBlock extends HorizontalDirectionalBlock implements E
     @Override
     public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
         super.destroy(pLevel, pPos, pState);
-    }
-
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if(pLevel.isClientSide) return InteractionResult.SUCCESS;
-        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-        if (blockEntity instanceof TrophyBlockEntity entity) {
-            return entity.onUse(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        }
-        return InteractionResult.CONSUME;
     }
 
     @Nullable
