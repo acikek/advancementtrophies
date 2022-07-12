@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "advancementtrophies",
+  "version": "${version}",
+
+  "name": "AdvancementTrophies",
+  "description": "Get a trophy when you complete an advancement",
+  "authors": [
+    "JoshuaEpstein"
+  ],
+  "contact": {
+    "homepage": "https://joshepstein.co.uk/",
+    "sources": "https://github.com/JoshuaEpstein/advancementtrophies"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/advancementtrophies/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "joshuaepstein.advancementtrophies.Main"
+    ]
+  },
+  "mixins": [
+    "mixins.advancementtrophies.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  }
+}

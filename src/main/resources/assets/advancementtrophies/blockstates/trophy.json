@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "advancementtrophies:block/trophy"
+    },
+    "facing=south": {
+      "model": "advancementtrophies:block/trophy",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "advancementtrophies:block/trophy",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "advancementtrophies:block/trophy",
+      "y": 270
+    }
+  }
+}
