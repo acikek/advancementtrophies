@@ -153,15 +153,6 @@ public class TrophyBlock extends AbstractTrophyBlock {
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if(TrophyRenderer.positionsWithoutName.contains(pos)){
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    TrophyRenderer.positionsWithoutName.remove(pos);
-                }
-            }, 100);
-        }
         ItemStack itemStack = TrophyBlockEntity.getTrophyItemStack(((TrophyBlockEntity) world.getBlockEntity(pos)).getAdvancementName(), ((TrophyBlockEntity) world.getBlockEntity(pos)).getAdvancementDisplayItem());
         ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemStack);
         world.spawnEntity(itemEntity);

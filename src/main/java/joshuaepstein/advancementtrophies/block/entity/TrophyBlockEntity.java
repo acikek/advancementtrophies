@@ -40,9 +40,6 @@ public class TrophyBlockEntity extends BlockEntity {
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit){
-        if(world.getBlockEntity(pos) instanceof TrophyBlockEntity entity){
-            TrophyRenderer.toggleRenderName(pos);
-        }
         return ActionResult.CONSUME;
     }
 
@@ -58,7 +55,7 @@ public class TrophyBlockEntity extends BlockEntity {
         super.readNbt(nbt);
         this.advancementDisplayItem = nbt.getString("advancementDisplayItem");
         this.advancementName = nbt.getString("advancementName");
-        this.markDirty();
+//        this.markDirty();
     }
 
     public ItemStack getPickStack(){

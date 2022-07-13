@@ -38,7 +38,7 @@ public class Main implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static final Block TROPHY = new TrophyBlock(FabricBlockSettings.copyOf(Blocks.GOLD_BLOCK).strength(0.2f));
-    public static final BlockEntityType<TrophyBlockEntity> TROPHY_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Main.id("trophy_block_entity"), FabricBlockEntityTypeBuilder.create(TrophyBlockEntity::new, TROPHY).build(null));
+    public static BlockEntityType<TrophyBlockEntity> TROPHY_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(TrophyBlockEntity::new, TROPHY).build();
 
     @Override
     public void onInitialize() {
@@ -52,11 +52,10 @@ public class Main implements ModInitializer {
             }))));
         }));
 
-
-
         Registry.register(Registry.BLOCK, Main.id("trophy"), TROPHY);
         Registry.register(Registry.ITEM, Main.id("trophy"), new BlockItem(TROPHY, new FabricItemSettings()));
         BlockEntityRendererRegistry.register(TROPHY_BLOCK_ENTITY, TrophyRenderer::new);
+        TROPHY_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Main.id("trophy_tile_entity"), TROPHY_BLOCK_ENTITY);
     }
 
     public static String sId(String name){

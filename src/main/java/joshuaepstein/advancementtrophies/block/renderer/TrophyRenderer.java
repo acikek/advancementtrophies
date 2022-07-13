@@ -13,28 +13,20 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static net.minecraft.scoreboard.ScoreboardCriterion.XP;
-
 public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 
     private static ItemRenderer itemRenderer;
-    public static List<BlockPos> positionsWithoutName = new ArrayList<>();
 
     public TrophyRenderer(BlockEntityRendererFactory.Context context){
+//        itemRenderer = context.getItemRenderer();
     }
 
     @Override
@@ -85,22 +77,11 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
         matrixStackIn.push();
         matrixStackIn.translate(0.5F,  1.13F, 0.5F);
 
-//        Change the rotation of the item to be in the same direction as the block
         matrixStackIn.multiply(trophyBlock.getCachedState().get(TrophyBlock.FACING).getRotationQuaternion());
-//        Rotate 90 degrees on the x axis
         matrixStackIn.multiply(Vec3f.POSITIVE_X.getRadialQuaternion((float) Math.toRadians(-90)));
         matrixStackIn.scale(0.35F, 0.35F, 0.35F);
         BakedModel itemModel = itemRenderer.getModel(new ItemStack(item), null, null, 0);
         itemRenderer.renderItem(new ItemStack(item), ModelTransformation.Mode.NONE, false, matrixStackIn, bufferIn, packedLightIn, OverlayTexture.DEFAULT_UV, itemModel);
         matrixStackIn.pop();
-//        RenderSystem.enableCull();
-    }
-
-    public static void toggleRenderName(BlockPos pos) {
-        if(positionsWithoutName.contains(pos)) {
-            positionsWithoutName.remove(pos);
-        } else {
-            positionsWithoutName.add(pos);
-        }
     }
 }

@@ -42,8 +42,8 @@ public class AdvancementMixins {
             tag.put("BlockEntityTag", blockTag);
             stack.setNbt(tag);
             stack.setCustomName(Text.literal(this.advancement.getDisplay().getTitle().getString() +  " Trophy").setStyle(Style.EMPTY.withItalic(false).withColor(Formatting.GOLD)));
+
             MinecraftClient.getInstance().player.giveItemStack(stack);
         }
     }
-
 }
