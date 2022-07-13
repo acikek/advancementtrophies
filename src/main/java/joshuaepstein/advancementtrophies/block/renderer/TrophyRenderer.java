@@ -26,7 +26,6 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
     private static ItemRenderer itemRenderer;
 
     public TrophyRenderer(BlockEntityRendererFactory.Context context){
-//        itemRenderer = context.getItemRenderer();
     }
 
     @Override
