@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Mod(Main.MOD_ID)
 public class Main {
     public static final String MOD_ID = "advancementtrophies";
-    public static final String MOD_VERSION = "1.2";
+    public static final String MOD_VERSION = "1.3";
     public static final String patchNotesURL = "https://patch.joshepstein.co.uk/trophies";
     public static final Logger LOGGER = LogManager.getLogger();
 

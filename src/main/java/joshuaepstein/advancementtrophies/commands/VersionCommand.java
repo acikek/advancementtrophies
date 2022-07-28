@@ -8,11 +8,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
-import org.w3c.dom.Text;
-
-import java.util.UUID;
 
 public class VersionCommand extends Command {
     @Override
