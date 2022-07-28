@@ -29,7 +29,11 @@ public class AdvancementEvents {
                     CompoundTag tag = stack.getOrCreateTag();
                     CompoundTag blockTag = new CompoundTag();
                     blockTag.putString("advancementName", event.getAdvancement().getDisplay().getTitle().getString());
-                    blockTag.putString("advancementDisplayItem", Registry.ITEM.getKey(event.getAdvancement().getDisplay().getIcon().getItem()).toString());
+                    if(event.getAdvancement().getDisplay() == null){
+                        blockTag.putString("advancementDisplayItem", "minecraft:air");
+                    } else {
+                        blockTag.putString("advancementDisplayItem", Registry.ITEM.getKey(event.getAdvancement().getDisplay().getIcon().getItem()).toString());
+                    }
                     tag.put("BlockEntityTag", blockTag);
                     stack.setTag(tag);
                     stack.setHoverName(Component.literal(event.getAdvancement().getDisplay().getTitle().getString() +  " Trophy").withStyle(Style.EMPTY.withItalic(false).withColor(event.getAdvancement().getChatComponent().getStyle().getColor())));
