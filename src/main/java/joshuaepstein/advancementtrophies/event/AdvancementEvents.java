@@ -24,7 +24,7 @@ public class AdvancementEvents {
         if(Iterables.size(event.getAdvancement().getChildren()) == 0){
             if(event.getAdvancement().getId().toString().contains("recipe")) return;
             if(!event.getAdvancement().getDisplay().getFrame().equals(FrameType.TASK)){
-                if(!event.getPlayer().getLevel().isClientSide){
+                if(!event.getEntity().getLevel().isClientSide){
                     ItemStack stack = new ItemStack(ModBlocks.TROPHY);
                     CompoundTag tag = stack.getOrCreateTag();
                     CompoundTag blockTag = new CompoundTag();
@@ -37,7 +37,7 @@ public class AdvancementEvents {
                     tag.put("BlockEntityTag", blockTag);
                     stack.setTag(tag);
                     stack.setHoverName(Component.literal(event.getAdvancement().getDisplay().getTitle().getString() +  " Trophy").withStyle(Style.EMPTY.withItalic(false).withColor(event.getAdvancement().getChatComponent().getStyle().getColor())));
-                    giveItem(((ServerPlayer) event.getPlayer()), stack);
+                    giveItem(((ServerPlayer) event.getEntity()), stack);
                 }
             }
         }

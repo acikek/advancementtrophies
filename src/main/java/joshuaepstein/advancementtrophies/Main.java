@@ -40,7 +40,7 @@ public class Main {
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::onCommandRegister);
     }
     public void onCommandRegister(RegisterCommandsEvent event){
-        ModCommands.registerCommands(event.getDispatcher(), event.getEnvironment());
+        ModCommands.registerCommands(event.getDispatcher(), event.getCommandSelection());
     }
 
     public static ResourceLocation id(String name){

@@ -13,15 +13,9 @@ public class RegistryEvents {
 
     @SubscribeEvent
     public static void onRegisters(RegisterEvent event){
-        event.register(ForgeRegistries.Keys.BLOCKS, (reg) -> {
-            ModBlocks.registerBlocks(reg);
-        });
-        event.register(ForgeRegistries.Keys.ITEMS, (reg) -> {
-            ModBlocks.registerBlockItems(reg);
-        });
-        event.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, (reg) -> {
-            ModBlocks.registerTileEntities(reg);
-        });
+        event.register(ForgeRegistries.Keys.BLOCKS, ModBlocks::registerBlocks);
+        event.register(ForgeRegistries.Keys.ITEMS, ModBlocks::registerBlockItems);
+        event.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, ModBlocks::registerTileEntities);
     }
 
     @SubscribeEvent
